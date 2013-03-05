@@ -16,7 +16,7 @@
     <div class="row">
       <%= form_tag eval_url(level: @level), remote: true, id: 'run_code' do %>
         <%= hidden_field_tag :code, "", id: 'code_snippet' %>
-        <%#= submit_tag "Run The Code" %>
+        <%= submit_tag "Run The Code" %>
       <% end %>
     </div>
 
@@ -46,7 +46,7 @@
     $("#run_code").on("submit", function() {
       $("#code_snippet").val(editor.getValue());
     });
-    editor.getSession().on('change', function(e) {
-      $("#run_code").submit();
-    });
+    // editor.getSession().on('change', function(e) {
+    //   $("#run_code").submit();
+    // });
 </script>
