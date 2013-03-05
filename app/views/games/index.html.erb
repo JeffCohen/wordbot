@@ -1,8 +1,9 @@
-<h1>Games</h1>
-
-
-<ul>
-  <li><%= link_to "Easy", easy_game_url %></li>
-  <li><%= link_to "Medium", easy_game_url %></li>
-  <li><%= link_to "Hard", easy_game_url %></li>
-</ul>
+<div class="hero-unit">
+  <h1>Start a Game</h1>
+  <p>Automate the wordbot in as few commands as possible!</p>
+  <p>
+    <% %w(easy medium hard).each do |level| %>
+      <%= link_to level.capitalize, game_url(level: level), class: 'btn btn-large btn-success' %>
+    <% end %>
+  </p>
+</div>
