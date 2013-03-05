@@ -1,0 +1,51 @@
+<div class="row">
+    <h1 class="page-header">Level: <%= @level.capitalize %></h1>
+</div>
+
+<div class="row">
+  <div class="span4 pull-right">
+    <div class="row well">
+      <p><strong>Allowed Commands:</strong></p>
+      <ul>
+        <li>keep</li>
+        <li>skip</li>
+        <li>chop</li>
+      </ul>
+    </div>
+    <div class="row">
+      <%= form_tag eval_url(level: @level), remote: true, id: 'run_code' do %>
+        <%= hidden_field_tag :code, "", id: 'code_snippet' %>
+        <%#= submit_tag "Run The Code" %>
+      <% end %>
+    </div>
+
+  </div>
+  <div class="span7">
+    <div class="row">
+        <p class="lead">From: <code><%= @puzzle %></code></p>
+        <p class="lead">Goal: <code><%= @solution %></code></p>
+    </div>
+    <div class="row">
+        <p class="lead">Result:
+        <code id="result_value"><%= @result %></code>
+      </p>
+    </div>
+    <div id="editor" class="row"><%= @code %></div>
+  </div>
+</div>
+
+<script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var editor = ace.edit("editor");
+    // editor.setTheme("ace/theme/vibrant_ink");
+    editor.setTheme("ace/theme/cobalt");
+    editor.getSession().setMode("ace/mode/ruby");
+    document.getElementById('editor').style.fontSize='16px';
+    editor.resize();
+    $("#run_code").on("submit", function() {
+      $("#code_snippet").val(editor.getValue());
+    });
+    editor.getSession().on('change', function(e) {
+      $("#run_code").submit();
+    });
+</script>
